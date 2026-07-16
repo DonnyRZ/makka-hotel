@@ -1,0 +1,17 @@
+# Package-manager cache; it is generated locally and not application source.
+.pnpm-store/
+
+# Generated audit thumbnails.
+tmp/
+
+# Original media sources; only optimized, web-ready assets belong in web/public/.
+Assets/
+
+# Local development logs.
+*.stdout.log
+*.stderr.log
+
+# Local IDE and operating-system files.
+.cursor/
+.DS_Store
+Thumbs.db
