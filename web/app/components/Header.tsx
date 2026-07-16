@@ -11,7 +11,7 @@ type HeaderProps = {
   dictionary: Dictionary;
 };
 
-const primaryNav: PageKey[] = ["hotel", "rooms", "dining", "rooftop", "events", "gallery", "location"];
+const primaryNav: PageKey[] = ["home", "hotel", "rooms", "dining", "rooftop", "events", "gallery", "location"];
 
 export function Header({ locale, page, dictionary }: HeaderProps) {
   const [open, setOpen] = useState(false);
@@ -82,7 +82,7 @@ export function Header({ locale, page, dictionary }: HeaderProps) {
 
       <div id="mobile-menu" className={`mobile-menu ${open ? "mobile-menu--open" : ""}`} aria-hidden={!open} inert={!open ? true : undefined}>
         <nav aria-label="Mobile navigation">
-          {(["home", ...primaryNav] as PageKey[]).map((item, index) => (
+          {primaryNav.map((item, index) => (
             <Link key={item} className={page === item ? "active" : ""} href={pagePath(locale, item)} onClick={() => setOpen(false)}>
               <span>{String(index + 1).padStart(2, "0")}</span>{dictionary.nav[item]}
             </Link>
