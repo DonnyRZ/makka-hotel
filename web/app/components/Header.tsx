@@ -11,7 +11,7 @@ type HeaderProps = {
   dictionary: Dictionary;
 };
 
-const primaryNav: PageKey[] = ["home", "hotel", "rooms", "dining", "rooftop", "events", "gallery", "location"];
+const primaryNav: PageKey[] = ["home", "hotel", "rooms", "dining", "rooftop", "events", "location", "gallery"];
 
 export function Header({ locale, page, dictionary }: HeaderProps) {
   const [open, setOpen] = useState(false);

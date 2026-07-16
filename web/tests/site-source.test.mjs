@@ -46,3 +46,12 @@ test("responsive navigation and mobile layout contracts stay intact", async () =
   assert.match(css, /\.gallery-filters\s*\{[^}]*overflow-x:\s*auto/s);
   assert.match(css, /\.story-visual\s*\{[^}]*aspect-ratio:\s*4\s*\/\s*3/s);
 });
+
+test("header keeps Gallery at the end and preserves compact brand and statistic values", async () => {
+  const css = await readFile(path.join(root, "app", "globals.css"), "utf8");
+  const header = await readFile(path.join(root, "app", "components", "Header.tsx"), "utf8");
+
+  assert.match(header, /"location",\s*"gallery"/);
+  assert.match(css, /\.stat strong\s*\{[^}]*white-space:\s*nowrap/s);
+  assert.doesNotMatch(css, /\.brand-copy small\s*\{[^}]*display:\s*none/s);
+});
