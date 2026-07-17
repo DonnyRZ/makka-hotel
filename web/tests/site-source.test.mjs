@@ -113,3 +113,32 @@ test("container deployment stays production-parity and VPS-isolated", async () =
   assert.match(compose, /healthcheck:/);
   assert.match(compose, /max-size:\s*10m/);
 });
+
+test("visitor tracking covers every page while the card remains homepage-only", async () => {
+  const compose = await readFile(path.join(root, "..", "compose.yaml"), "utf8");
+  const packageJson = await readFile(path.join(root, "package.json"), "utf8");
+  const sitePage = await readFile(path.join(root, "app", "components", "SitePage.tsx"), "utf8");
+  const layout = await readFile(path.join(root, "app", "layout.tsx"), "utf8");
+  const counter = await readFile(path.join(root, "app", "components", "VisitorCounter.tsx"), "utf8");
+  const tracker = await readFile(path.join(root, "app", "components", "VisitorTracker.tsx"), "utf8");
+  const tracking = await readFile(path.join(root, "app", "components", "visitorTracking.ts"), "utf8");
+  const route = await readFile(path.join(root, "app", "api", "visitors", "route.ts"), "utf8");
+
+  assert.match(compose, /visitor-api:/);
+  assert.match(compose, /makka_postgres_data/);
+  assert.match(compose, /VISITOR_API_URL/);
+  assert.match(compose, /VISITOR_GEOLOOKUP_URL/);
+  assert.doesNotMatch(packageJson, /"postgres"/);
+  assert.match(sitePage, /isHome && <VisitorCounter/);
+  assert.match(layout, /<VisitorTracker/);
+  assert.match(tracker, /registerVisitor\(\)/);
+  assert.match(counter, /registerVisitor\(\)/);
+  assert.match(tracking, /registration \?\?=/);
+  assert.match(tracking, /fetch\("\/api\/visitors"/);
+  assert.match(counter, /role="dialog"/);
+  assert.match(route, /crypto\.subtle/);
+  assert.match(route, /x-real-ip/);
+  assert.match(route, /defaultMajorCities/);
+  assert.match(route, /visitor_overview/);
+  assert.match(route, /Cache-Control/);
+});

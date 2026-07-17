@@ -11,6 +11,9 @@ Assets/
 *.stdout.log
 *.stderr.log
 
+# Local Docker secrets.
+.env
+
 # Local IDE and operating-system files.
 .cursor/
 .DS_Store

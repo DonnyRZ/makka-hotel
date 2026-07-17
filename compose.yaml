@@ -11,6 +11,10 @@ services:
       NODE_ENV: production
       HOST: 0.0.0.0
       PORT: 3000
+      VISITOR_API_URL: "http://visitor-api:3000"
+      VISITOR_IP_HASH_SECRET: "${VISITOR_IP_HASH_SECRET:-}"
+      VISITOR_GEOLOOKUP_URL: "${VISITOR_GEOLOOKUP_URL:-https://ipwho.is/{ip}}"
+      VISITOR_MAJOR_CITIES: "${VISITOR_MAJOR_CITIES:-}"
     ports:
       - "${MAKKA_BIND_IP:-127.0.0.1}:${MAKKA_PORT:-3000}:3000"
     init: true
@@ -36,3 +40,54 @@ services:
       options:
         max-size: 10m
         max-file: "3"
+
+  db:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_DB: "${MAKKA_DB_NAME:-makka_hotel}"
+      POSTGRES_USER: "${MAKKA_DB_USER:-makka}"
+      POSTGRES_PASSWORD: "${MAKKA_DB_PASSWORD:-makka-local-db-only}"
+    volumes:
+      - makka_postgres_data:/var/lib/postgresql/data
+      - ./db/init/001-visitors.sql:/docker-entrypoint-initdb.d/001-visitors.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 5
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+  migrate:
+    image: postgres:17-bookworm
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGDATABASE: "${MAKKA_DB_NAME:-makka_hotel}"
+      PGPASSWORD: "${MAKKA_DB_PASSWORD:-makka-local-db-only}"
+      PGUSER: "${MAKKA_DB_USER:-makka}"
+    volumes:
+      - ./db/init/001-visitors.sql:/migrations/001-visitors.sql:ro
+    command: ["psql", "--host=db", "--file=/migrations/001-visitors.sql", "--set=ON_ERROR_STOP=1"]
+    restart: "no"
+
+  visitor-api:
+    image: postgrest/postgrest:v12.2.3
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    environment:
+      PGRST_DB_ANON_ROLE: visitor_counter
+      PGRST_DB_POOL: 2
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_URI: "postgresql://${MAKKA_DB_USER:-makka}:${MAKKA_DB_PASSWORD:-makka-local-db-only}@db:5432/${MAKKA_DB_NAME:-makka_hotel}"
+      PGRST_SERVER_PORT: 3000
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  makka_postgres_data:

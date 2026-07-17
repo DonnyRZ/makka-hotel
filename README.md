@@ -6,6 +6,8 @@ the generated standalone server as a non-root user.
 
 ## Local audit
 
+Copy `.env.docker.example` to `.env` and replace the database password and visitor hash secret before any public deployment. The application remains available if the visitor database is temporarily unavailable.
+
 Start only the Mecca Hotel service:
 
 ```powershell
@@ -57,3 +59,11 @@ The Nginx upstream stays `http://127.0.0.1:3003`. The Compose project name,
 service-scoped commands, loopback-only port, health check, bounded logs,
 non-root runtime, and restart policy keep deployment isolated from other VPS
 applications.
+
+For the visitor counter, Nginx must overwrite the IP header sent to the app:
+
+```nginx
+proxy_set_header X-Real-IP $remote_addr;
+```
+
+The counter stores only an HMAC hash of that address, never the raw IP.

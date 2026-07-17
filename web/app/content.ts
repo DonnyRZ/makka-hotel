@@ -78,6 +78,16 @@ export type Dictionary = {
     station: string;
     directions: string;
   };
+  visitor: {
+    label: string;
+    details: string;
+    total: string;
+    active: string;
+    cities: string;
+    topCities: string;
+    noCities: string;
+    close: string;
+  };
   footer: {
     statement: string;
     discover: string;
@@ -511,6 +521,16 @@ const en: Dictionary = {
     airport: "Approximately 30 minutes from Tashkent International Airport",
     station: "Approximately 20 minutes from Tashkent Railway Station",
     directions: "Open map",
+  },
+  visitor: {
+    label: "Website visitors",
+    details: "View geographic breakdown",
+    total: "Total recorded",
+    active: "Active in 7 days",
+    cities: "Major cities",
+    topCities: "Top cities",
+    noCities: "City data will appear as new visits arrive.",
+    close: "Close visitor details",
   },
   footer: {
     statement: "Contemporary boutique hospitality shaped by Uzbek character, thoughtful comfort and fully halal service.",

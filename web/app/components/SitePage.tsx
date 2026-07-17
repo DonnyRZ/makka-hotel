@@ -3,6 +3,7 @@ import type { Dictionary, Locale, PageKey } from "../content";
 import { galleryImages, pageKeys, pagePath } from "../content";
 import { GalleryExplorer } from "./GalleryExplorer";
 import { Header } from "./Header";
+import { VisitorCounter } from "./VisitorCounter";
 
 type SitePageProps = {
   locale: Locale;
@@ -218,6 +219,8 @@ export function SitePage({ locale, page, dictionary }: SitePageProps) {
           <Link className="button button--gold" href={closingLinks[page]}>{copy.ctaButton}</Link>
         </div>
       </section>
+
+      {isHome && <VisitorCounter copy={dictionary.visitor} locale={locale} />}
 
       <Footer locale={locale} page={page} dictionary={dictionary} />
     </main>

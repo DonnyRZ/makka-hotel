@@ -196,6 +196,34 @@ button { color: inherit; }
 .closing-content p { max-width: 630px; margin: 0 auto; color: var(--sage-300); font-size: 17px; }
 .closing-content .button { margin-top: 30px; }
 
+.visitor-section { padding: 80px 0; background: var(--forest-950); }
+.visitor-card { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 38px; padding: clamp(30px, 4vw, 48px); border: 1px solid var(--border-dark); color: inherit; background: var(--forest-800); cursor: pointer; text-align: left; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.visitor-card:hover { border-color: rgba(223,199,124,.5); background: var(--forest-850); transform: translateY(-2px); }
+.visitor-card-copy { display: grid; gap: 11px; }
+.visitor-card-copy small, .visitor-kicker { color: var(--gold-300); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.visitor-card-copy em { color: var(--sage-300); font-size: 13px; font-style: normal; }
+.visitor-card-copy b { color: var(--gold-500); font-size: 16px; }
+.visitor-card > strong { flex: 0 0 auto; color: var(--gold-300); font: 600 clamp(62px, 8vw, 112px)/.8 var(--serif); letter-spacing: -.05em; }
+.visitor-dialog-backdrop { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 30px; background: rgba(2, 12, 9, .78); backdrop-filter: blur(10px); }
+.visitor-dialog { position: relative; width: min(760px, 100%); max-height: min(760px, calc(100dvh - 60px)); overflow-y: auto; padding: clamp(30px, 5vw, 58px); border: 1px solid rgba(223,199,124,.3); background: #08231c; box-shadow: 0 28px 100px rgba(0,0,0,.4); }
+.visitor-dialog h2 { margin: 15px 0 34px; color: var(--ivory-100); font: 600 clamp(35px, 5vw, 56px)/1 var(--serif); letter-spacing: -.035em; }
+.visitor-dialog-close { position: absolute; top: 22px; right: 22px; width: 42px; height: 42px; border: 1px solid var(--border-dark); border-radius: 50%; color: var(--sage-300); background: transparent; cursor: pointer; font-size: 28px; line-height: 1; }
+.visitor-dialog-close:hover { color: var(--ivory-100); border-color: var(--gold-500); }
+.visitor-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0 0 42px; border: 1px solid var(--border-dark); background: var(--border-dark); }
+.visitor-metrics div { min-width: 0; padding: 20px; background: var(--forest-900); }
+.visitor-metrics dt { color: var(--sage-300); font-size: 9px; font-weight: 700; letter-spacing: .13em; line-height: 1.35; text-transform: uppercase; }
+.visitor-metrics dd { margin: 12px 0 0; color: var(--gold-300); font: 600 clamp(27px, 3.5vw, 38px)/1 var(--serif); }
+.city-list { display: grid; gap: 17px; margin: 0; padding: 0; list-style: none; }
+.city-list li { display: grid; grid-template-columns: 32px minmax(120px, 1fr) minmax(80px, 1.7fr) 42px; align-items: center; gap: 14px; }
+.city-rank { color: var(--gold-500); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+.city-name { display: grid; gap: 2px; min-width: 0; }
+.city-name b { overflow: hidden; color: var(--ivory-100); font-size: 15px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.city-name small { overflow: hidden; color: var(--sage-300); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.city-bar { height: 7px; overflow: hidden; border: 1px solid rgba(223,199,124,.18); background: var(--forest-950); }
+.city-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold-500), var(--gold-300)); }
+.city-list li > strong { color: var(--sand-300); font: 600 17px/1 var(--serif); text-align: right; }
+.visitor-empty { margin: 0; padding: 25px 0 5px; color: var(--sage-300); font-size: 14px; }
+
 .site-footer { position: relative; overflow: hidden; padding: 105px 0 28px; background: var(--forest-950); }
 .footer-pattern { opacity: .07; mask-image: linear-gradient(to top, #000, transparent 86%); }
 .footer-top { position: relative; display: grid; grid-template-columns: 1.7fr .65fr .8fr; gap: 90px; padding-bottom: 80px; }
@@ -346,6 +374,17 @@ button { color: inherit; }
   .closing-content h2 { margin-top: 20px; font-size: clamp(36px, 10.5vw, 43px); }
   .closing-content p { font-size: 15px; line-height: 1.7; }
   .closing-content .button { width: min(100%, 320px); }
+  .visitor-section { padding: 46px 0; }
+  .visitor-card { padding: 28px 24px; }
+  .visitor-card > strong { font-size: clamp(56px, 17vw, 76px); }
+  .visitor-dialog-backdrop { align-items: end; padding: 0; }
+  .visitor-dialog { width: 100%; max-height: min(84dvh, 720px); padding: 34px 22px; border-inline: 0; border-bottom: 0; }
+  .visitor-dialog h2 { margin-bottom: 28px; }
+  .visitor-metrics { grid-template-columns: 1fr; gap: 1px; margin-bottom: 30px; }
+  .visitor-metrics div { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding: 16px; }
+  .visitor-metrics dd { margin: 0; }
+  .city-list { gap: 15px; }
+  .city-list li { grid-template-columns: 24px minmax(90px, 1fr) minmax(52px, 1.1fr) 34px; gap: 9px; }
   .site-footer { padding-top: 68px; }
   .footer-top { grid-template-columns: 1fr; gap: 38px; padding-bottom: 55px; }
   .footer-visit { grid-column: auto; }
