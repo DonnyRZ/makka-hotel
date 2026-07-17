@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Dictionary, Locale, PageKey } from "../content";
-import { galleryImages, pagePath } from "../content";
+import { galleryImages, pageKeys, pagePath } from "../content";
 import { GalleryExplorer } from "./GalleryExplorer";
 import { Header } from "./Header";
 
@@ -61,16 +61,9 @@ function Footer({ locale, page, dictionary }: { locale: Locale; page: PageKey; d
 export function SitePage({ locale, page, dictionary }: SitePageProps) {
   const copy = dictionary.pages[page];
   const isHome = page === "home";
-  const heroLinks: Record<PageKey, { primary: string; secondary: string }> = {
-    home: { primary: pagePath(locale, "hotel"), secondary: pagePath(locale, "rooms") },
-    hotel: { primary: pagePath(locale, "rooms"), secondary: pagePath(locale, "gallery") },
-    rooms: { primary: pagePath(locale, "gallery"), secondary: pagePath(locale, "hotel") },
-    dining: { primary: "#introduction", secondary: pagePath(locale, "gallery") },
-    rooftop: { primary: "#introduction", secondary: pagePath(locale, "gallery") },
-    events: { primary: pagePath(locale, "location"), secondary: "#introduction" },
-    gallery: { primary: "#gallery", secondary: pagePath(locale, "hotel") },
-    location: { primary: "#location-details", secondary: pagePath(locale, "rooms") },
-  };
+  const pageIndex = pageKeys.indexOf(page);
+  const previousPage = pageIndex > 0 ? pageKeys[pageIndex - 1] : null;
+  const nextPage = pageIndex < pageKeys.length - 1 ? pageKeys[pageIndex + 1] : null;
   const closingLinks: Record<PageKey, string> = {
     home: pagePath(locale, "rooms"),
     hotel: pagePath(locale, "rooms"),
@@ -94,12 +87,36 @@ export function SitePage({ locale, page, dictionary }: SitePageProps) {
           <SectionLabel>{copy.eyebrow}</SectionLabel>
           <h1>{copy.title}</h1>
           <p>{copy.intro}</p>
-          <div className="hero-actions">
-            <Link className="button button--gold" href={heroLinks[page].primary}>{copy.primaryCta}</Link>
-            <Link className="button button--outline" href={heroLinks[page].secondary}>{copy.secondaryCta}</Link>
-          </div>
+          <nav
+            className={`hero-pager ${!previousPage ? "hero-pager--next-only" : !nextPage ? "hero-pager--previous-only" : ""}`}
+            aria-label={dictionary.pageNavigation}
+          >
+            {previousPage && (
+              <Link
+                className="button hero-page-button hero-page-button--previous"
+                href={pagePath(locale, previousPage)}
+                aria-label={`${dictionary.previousPage}: ${dictionary.nav[previousPage]}`}
+              >
+                <span className="hero-page-arrow" aria-hidden="true" />
+                <span>{dictionary.nav[previousPage]}</span>
+              </Link>
+            )}
+            {nextPage && (
+              <Link
+                className="button hero-page-button hero-page-button--next"
+                href={pagePath(locale, nextPage)}
+                aria-label={`${dictionary.nextPage}: ${dictionary.nav[nextPage]}`}
+              >
+                <span>{dictionary.nav[nextPage]}</span>
+                <span className="hero-page-arrow" aria-hidden="true" />
+              </Link>
+            )}
+          </nav>
         </div>
-        <a className="scroll-cue" href="#introduction" aria-label="Scroll to introduction"><span /><small>SCROLL</small></a>
+        <a className="scroll-cue" href="#introduction" aria-label={dictionary.scrollToExplore}>
+          <small>{dictionary.scrollToExplore}</small>
+          <span aria-hidden="true"><i /><i /></span>
+        </a>
       </section>
 
       <section id="introduction" className="intro-section section-light">

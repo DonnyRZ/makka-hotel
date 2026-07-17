@@ -45,3 +45,4 @@ next-env.d.ts
 dev.pid
 dev.stdout.log
 dev.stderr.log
+.codex-*.log

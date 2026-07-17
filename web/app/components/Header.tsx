@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Dictionary, Locale, PageKey } from "../content";
 import { locales, pagePath } from "../content";
 
@@ -15,7 +15,9 @@ const primaryNav: PageKey[] = ["home", "hotel", "rooms", "dining", "rooftop", "e
 
 export function Header({ locale, page, dictionary }: HeaderProps) {
   const [open, setOpen] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const languageDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -26,7 +28,10 @@ export function Header({ locale, page, dictionary }: HeaderProps) {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        setLanguageOpen(false);
+      }
     };
     document.documentElement.style.overflow = open ? "hidden" : "";
     document.body.style.overflow = open ? "hidden" : "";
@@ -37,6 +42,14 @@ export function Header({ locale, page, dictionary }: HeaderProps) {
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [open]);
+
+  useEffect(() => {
+    const onPointerDown = (event: PointerEvent) => {
+      if (!languageDropdownRef.current?.contains(event.target as Node)) setLanguageOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, []);
 
   return (
     <>
@@ -58,13 +71,24 @@ export function Header({ locale, page, dictionary }: HeaderProps) {
           </nav>
 
           <div className="header-actions">
-            <div className="language-switcher">
-              <span className="sr-only">{dictionary.switchLanguage}</span>
-              {locales.map((item) => (
-                <Link key={item} className={locale === item ? "active" : ""} href={pagePath(item, page)} hrefLang={item}>
-                  {item.toUpperCase()}
-                </Link>
-              ))}
+            <div ref={languageDropdownRef} className={`language-dropdown ${languageOpen ? "language-dropdown--open" : ""}`}>
+              <button
+                className="language-dropdown-trigger"
+                type="button"
+                aria-expanded={languageOpen}
+                aria-controls="language-menu"
+                aria-label={dictionary.switchLanguage}
+                onClick={() => setLanguageOpen((current) => !current)}
+              >
+                {locale.toUpperCase()}<span aria-hidden="true">⌄</span>
+              </button>
+              <div id="language-menu" className="language-dropdown-menu">
+                {locales.map((item) => (
+                  <Link key={item} className={locale === item ? "active" : ""} href={pagePath(item, page)} hrefLang={item} onClick={() => setLanguageOpen(false)}>
+                    {item === "en" ? "English" : item === "ru" ? "Русский" : "O‘zbekcha"}
+                  </Link>
+                ))}
+              </div>
             </div>
             <button
               className="menu-toggle"

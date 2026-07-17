@@ -1,0 +1,16 @@
+services:
+  app:
+    image: makka-hotel-dev:local
+    build:
+      target: development
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+    command: ["pnpm", "dev", "--", "--hostname", "0.0.0.0", "--port", "3000"]
+    volumes:
+      - ./web:/app
+      - makka_node_modules_debian:/app/node_modules
+    read_only: false
+
+volumes:
+  makka_node_modules_debian:

@@ -8,8 +8,8 @@ export const pageKeys = [
   "dining",
   "rooftop",
   "events",
-  "gallery",
   "location",
+  "gallery",
 ] as const;
 
 export type PageKey = (typeof pageKeys)[number];
@@ -54,6 +54,10 @@ export type PageCopy = {
 export type Dictionary = {
   localeName: string;
   switchLanguage: string;
+  scrollToExplore: string;
+  pageNavigation: string;
+  previousPage: string;
+  nextPage: string;
   menu: string;
   close: string;
   explore: string;
@@ -104,6 +108,10 @@ const commonHero = "/images/exterior/hero.jpg";
 const en: Dictionary = {
   localeName: "English",
   switchLanguage: "Change language",
+  scrollToExplore: "Scroll to explore",
+  pageNavigation: "Explore adjacent pages",
+  previousPage: "Previous page",
+  nextPage: "Next page",
   menu: "Menu",
   close: "Close",
   explore: "Explore",
@@ -514,6 +522,10 @@ const ru: Dictionary = {
   ...en,
   localeName: "Русский",
   switchLanguage: "Сменить язык",
+  scrollToExplore: "Листайте ниже",
+  pageNavigation: "Переход между разделами",
+  previousPage: "Предыдущая страница",
+  nextPage: "Следующая страница",
   menu: "Меню",
   close: "Закрыть",
   explore: "Подробнее",
@@ -624,6 +636,10 @@ const uz: Dictionary = {
   ...en,
   localeName: "O‘zbekcha",
   switchLanguage: "Tilni almashtirish",
+  scrollToExplore: "Pastga suring",
+  pageNavigation: "Sahifalar bo‘ylab harakatlanish",
+  previousPage: "Oldingi sahifa",
+  nextPage: "Keyingi sahifa",
   menu: "Menyu",
   close: "Yopish",
   explore: "Batafsil",

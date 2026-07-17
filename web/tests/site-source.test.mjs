@@ -55,3 +55,61 @@ test("header keeps Gallery at the end and preserves compact brand and statistic 
   assert.match(css, /\.stat strong\s*\{[^}]*white-space:\s*nowrap/s);
   assert.doesNotMatch(css, /\.brand-copy small\s*\{[^}]*display:\s*none/s);
 });
+
+test("desktop hero fits its complete composition inside short viewports", async () => {
+  const css = await readFile(path.join(root, "app", "globals.css"), "utf8");
+
+  assert.match(css, /\.hero--home,\s*\.hero--inner\s*\{[^}]*height:\s*100svh[^}]*min-height:\s*0/s);
+  assert.match(css, /@media\s*\(min-width:\s*821px\)\s*and\s*\(max-height:\s*900px\)/);
+  assert.match(css, /@media\s*\(min-width:\s*821px\)\s*and\s*\(max-height:\s*720px\)/);
+  assert.match(css, /\.hero-content h1\s*\{[^}]*min\([^)]*vw,[^)]*vh\)/s);
+  assert.match(css, /\.scroll-cue\s*\{[^}]*left:\s*50%[^}]*bottom:/s);
+});
+
+test("scroll cue follows the active language", async () => {
+  const content = await readFile(path.join(root, "app", "content.ts"), "utf8");
+  const sitePage = await readFile(path.join(root, "app", "components", "SitePage.tsx"), "utf8");
+
+  assert.match(content, /scrollToExplore:\s*"Scroll to explore"/);
+  assert.match(content, /scrollToExplore:\s*"Листайте ниже"/);
+  assert.match(content, /scrollToExplore:\s*"Pastga suring"/);
+  assert.match(sitePage, /dictionary\.scrollToExplore/);
+  assert.doesNotMatch(sitePage, />SCROLL TO EXPLORE</);
+});
+
+test("hero buttons form a localized previous and next page sequence", async () => {
+  const content = await readFile(path.join(root, "app", "content.ts"), "utf8");
+  const sitePage = await readFile(path.join(root, "app", "components", "SitePage.tsx"), "utf8");
+  const css = await readFile(path.join(root, "app", "globals.css"), "utf8");
+
+  assert.match(content, /"home",\s*"hotel",\s*"rooms",\s*"dining",\s*"rooftop",\s*"events",\s*"location",\s*"gallery"/s);
+  assert.match(sitePage, /pageKeys\.indexOf\(page\)/);
+  assert.match(sitePage, /pageIndex > 0 \? pageKeys\[pageIndex - 1\] : null/);
+  assert.match(sitePage, /pageIndex < pageKeys\.length - 1 \? pageKeys\[pageIndex \+ 1\] : null/);
+  assert.match(sitePage, /dictionary\.nav\[previousPage\]/);
+  assert.match(sitePage, /dictionary\.nav\[nextPage\]/);
+  assert.doesNotMatch(sitePage, /heroLinks/);
+  assert.match(css, /\.hero-pager\s*\{[^}]*width:\s*fit-content[^}]*display:\s*flex/s);
+  assert.match(css, /\.hero-page-button\s*\{[^}]*width:\s*auto[^}]*min-width:\s*172px/s);
+  assert.doesNotMatch(css, /\.hero-page-button--next\s*\{[^}]*grid-column/s);
+  assert.match(css, /\.hero-page-button:hover\s*\{[^}]*background:\s*var\(--gold-300\)/s);
+  assert.match(css, /\.hero-page-button--previous \.hero-page-arrow::after/);
+  assert.match(css, /\.hero-page-button--next \.hero-page-arrow::after/);
+});
+
+test("container deployment stays production-parity and VPS-isolated", async () => {
+  const dockerfile = await readFile(path.join(root, "Dockerfile"), "utf8");
+  const nextConfig = await readFile(path.join(root, "next.config.ts"), "utf8");
+  const compose = await readFile(path.join(root, "..", "compose.yaml"), "utf8");
+
+  assert.match(nextConfig, /output:\s*["']standalone["']/);
+  assert.match(dockerfile, /FROM node:\$\{NODE_VERSION\} AS runtime/);
+  assert.match(dockerfile, /USER node/);
+  assert.match(dockerfile, /HEALTHCHECK/);
+  assert.match(compose, /127\.0\.0\.1/);
+  assert.match(compose, /restart:\s*unless-stopped/);
+  assert.match(compose, /no-new-privileges:true/);
+  assert.match(compose, /read_only:\s*true/);
+  assert.match(compose, /healthcheck:/);
+  assert.match(compose, /max-size:\s*10m/);
+});
