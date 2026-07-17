@@ -54,14 +54,19 @@ export function VisitorCounter({ copy, locale }: VisitorCounterProps) {
             <small>{copy.label}</small>
             <em>{copy.details} <b aria-hidden="true">↗</b></em>
           </span>
-          <strong>{metrics === null ? "—" : number.format(data.count)}</strong>
+          <span className="visitor-card-metric">
+            <strong>{metrics === null ? "—" : number.format(data.count)}</strong>
+            <small>{copy.total}</small>
+          </span>
         </button>
       </div>
 
       {open && (
         <div className="visitor-dialog-backdrop" onMouseDown={() => setOpen(false)}>
           <section className="visitor-dialog" role="dialog" aria-modal="true" aria-label={copy.label} onMouseDown={(event) => event.stopPropagation()}>
-            <button className="visitor-dialog-close" type="button" onClick={() => setOpen(false)} aria-label={copy.close}>×</button>
+            <button className="visitor-dialog-close" type="button" onClick={() => setOpen(false)} aria-label={copy.close}>
+              <span aria-hidden="true" />
+            </button>
             <small className="visitor-kicker">{copy.label}</small>
             <h2>{copy.topCities}</h2>
             <dl className="visitor-metrics">

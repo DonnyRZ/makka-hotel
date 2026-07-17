@@ -650,6 +650,16 @@ const ru: Dictionary = {
   gallery: { filters: { all: "Все", exterior: "Экстерьер", rooms: "Номера", interiors: "Интерьеры", dining: "Рестораны", rooftop: "Терраса", views: "Виды" }, openImage: "Открыть изображение", closeImage: "Закрыть", previousImage: "Предыдущее", nextImage: "Следующее" },
   location: { locationTitle: "Напротив Центра исламской цивилизации", locationText: "Ташкент, Узбекистан. Полный официальный адрес будет добавлен после подтверждения отелем.", airport: "Около 30 минут от международного аэропорта Ташкента", station: "Около 20 минут от железнодорожного вокзала Ташкента", directions: "Открыть карту" },
   footer: { statement: "Современное бутик-гостеприимство с узбекским характером, продуманным комфортом и полностью халяльным сервисом.", discover: "Открыть", visit: "Посетить", location: "Напротив Центра исламской цивилизации, Ташкент", rights: "Все права защищены." },
+  visitor: {
+    label: "Посетители сайта",
+    details: "Посмотреть географию посетителей",
+    total: "Всего учтено",
+    active: "Активны за 7 дней",
+    cities: "Крупные города",
+    topCities: "Города с наибольшим числом посетителей",
+    noCities: "Данные по городам появятся с новыми посещениями.",
+    close: "Закрыть сведения о посетителях",
+  },
 };
 
 const uz: Dictionary = {
@@ -752,6 +762,16 @@ const uz: Dictionary = {
   gallery: { filters: { all: "Barchasi", exterior: "Tashqi ko‘rinish", rooms: "Xonalar", interiors: "Interyerlar", dining: "Restoranlar", rooftop: "Rooftop", views: "Manzaralar" }, openImage: "Rasmni ochish", closeImage: "Rasmni yopish", previousImage: "Oldingi rasm", nextImage: "Keyingi rasm" },
   location: { locationTitle: "Islom sivilizatsiyasi markazi ro‘parasida", locationText: "Toshkent, O‘zbekiston. To‘liq rasmiy ko‘cha manzili mehmonxona tasdiqlagach qo‘shiladi.", airport: "Toshkent xalqaro aeroportidan taxminan 30 daqiqa", station: "Toshkent temiryo‘l vokzalidan taxminan 20 daqiqa", directions: "Xaritani ochish" },
   footer: { statement: "O‘zbekona ruh, o‘ylangan qulaylik va to‘liq halol xizmat bilan zamonaviy butik mehmondo‘stlik.", discover: "Kashf eting", visit: "Tashrif", location: "Islom sivilizatsiyasi markazi ro‘parasida, Toshkent", rights: "Barcha huquqlar himoyalangan." },
+  visitor: {
+    label: "Sayt tashrifchilari",
+    details: "Tashrifchilar geografiyasini ko‘rish",
+    total: "Jami qayd etilgan",
+    active: "7 kun ichida faol",
+    cities: "Yirik shaharlar",
+    topCities: "Eng ko‘p tashrif buyurilgan shaharlar",
+    noCities: "Yangi tashriflar kelishi bilan shahar ma’lumotlari paydo bo‘ladi.",
+    close: "Tashrifchilar ma’lumotlarini yopish",
+  },
 };
 
 export const dictionaries: Record<Locale, Dictionary> = { en, ru, uz };

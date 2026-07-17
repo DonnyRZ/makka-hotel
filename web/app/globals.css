@@ -196,19 +196,28 @@ button { color: inherit; }
 .closing-content p { max-width: 630px; margin: 0 auto; color: var(--sage-300); font-size: 17px; }
 .closing-content .button { margin-top: 30px; }
 
-.visitor-section { padding: 80px 0; background: var(--forest-950); }
-.visitor-card { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 38px; padding: clamp(30px, 4vw, 48px); border: 1px solid var(--border-dark); color: inherit; background: var(--forest-800); cursor: pointer; text-align: left; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
-.visitor-card:hover { border-color: rgba(223,199,124,.5); background: var(--forest-850); transform: translateY(-2px); }
-.visitor-card-copy { display: grid; gap: 11px; }
+.visitor-section { padding: 46px 0; background: var(--forest-950); }
+.visitor-card { width: 100%; min-height: 126px; display: flex; align-items: center; justify-content: space-between; gap: 38px; padding: 26px clamp(26px, 3.4vw, 44px); border: 1px solid var(--border-dark); color: inherit; background: var(--forest-800); cursor: pointer; text-align: left; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.visitor-card:hover { border-color: rgba(223,199,124,.5); background: var(--forest-850); transform: translateY(-1px); }
+.visitor-card-copy { display: grid; gap: 8px; }
 .visitor-card-copy small, .visitor-kicker { color: var(--gold-300); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 .visitor-card-copy em { color: var(--sage-300); font-size: 13px; font-style: normal; }
 .visitor-card-copy b { color: var(--gold-500); font-size: 16px; }
-.visitor-card > strong { flex: 0 0 auto; color: var(--gold-300); font: 600 clamp(62px, 8vw, 112px)/.8 var(--serif); letter-spacing: -.05em; }
+.visitor-card-metric { flex: 0 0 auto; display: grid; gap: 6px; min-width: 138px; padding-left: clamp(26px, 3.5vw, 54px); border-left: 1px solid var(--border-dark); text-align: right; }
+.visitor-card-metric strong { color: var(--gold-300); font: 600 clamp(42px, 4.4vw, 58px)/.82 var(--serif); letter-spacing: -.05em; }
+.visitor-card-metric small { color: var(--sage-300); font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
 .visitor-dialog-backdrop { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 30px; background: rgba(2, 12, 9, .78); backdrop-filter: blur(10px); }
 .visitor-dialog { position: relative; width: min(760px, 100%); max-height: min(760px, calc(100dvh - 60px)); overflow-y: auto; padding: clamp(30px, 5vw, 58px); border: 1px solid rgba(223,199,124,.3); background: #08231c; box-shadow: 0 28px 100px rgba(0,0,0,.4); }
 .visitor-dialog h2 { margin: 15px 0 34px; color: var(--ivory-100); font: 600 clamp(35px, 5vw, 56px)/1 var(--serif); letter-spacing: -.035em; }
-.visitor-dialog-close { position: absolute; top: 22px; right: 22px; width: 42px; height: 42px; border: 1px solid var(--border-dark); border-radius: 50%; color: var(--sage-300); background: transparent; cursor: pointer; font-size: 28px; line-height: 1; }
-.visitor-dialog-close:hover { color: var(--ivory-100); border-color: var(--gold-500); }
+.visitor-dialog-close { position: absolute; top: 24px; right: 24px; width: 36px; height: 36px; display: grid; place-items: center; padding: 0; border: 1px solid transparent; border-radius: 3px; background: transparent; cursor: pointer; transition: border-color .2s ease, background .2s ease; }
+.visitor-dialog-close span { position: relative; display: block; width: 16px; height: 16px; }
+.visitor-dialog-close span::before, .visitor-dialog-close span::after { position: absolute; top: 7px; left: 0; width: 16px; height: 1.5px; background: var(--sage-300); content: ""; transition: background .2s ease, transform .2s ease; }
+.visitor-dialog-close span::before { transform: rotate(45deg); }
+.visitor-dialog-close span::after { transform: rotate(-45deg); }
+.visitor-dialog-close:hover { border-color: rgba(223,199,124,.45); background: rgba(223,199,124,.08); }
+.visitor-dialog-close:hover span::before { background: var(--gold-300); transform: rotate(45deg) scaleX(1.12); }
+.visitor-dialog-close:hover span::after { background: var(--gold-300); transform: rotate(-45deg) scaleX(1.12); }
+.visitor-dialog-close:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 3px; }
 .visitor-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0 0 42px; border: 1px solid var(--border-dark); background: var(--border-dark); }
 .visitor-metrics div { min-width: 0; padding: 20px; background: var(--forest-900); }
 .visitor-metrics dt { color: var(--sage-300); font-size: 9px; font-weight: 700; letter-spacing: .13em; line-height: 1.35; text-transform: uppercase; }
@@ -374,9 +383,13 @@ button { color: inherit; }
   .closing-content h2 { margin-top: 20px; font-size: clamp(36px, 10.5vw, 43px); }
   .closing-content p { font-size: 15px; line-height: 1.7; }
   .closing-content .button { width: min(100%, 320px); }
-  .visitor-section { padding: 46px 0; }
-  .visitor-card { padding: 28px 24px; }
-  .visitor-card > strong { font-size: clamp(56px, 17vw, 76px); }
+  .visitor-section { padding: 34px 0; }
+  .visitor-card { min-height: 108px; gap: 20px; padding: 21px 20px; }
+  .visitor-card-copy { gap: 7px; }
+  .visitor-card-copy em { font-size: 12px; }
+  .visitor-card-metric { min-width: 82px; gap: 5px; padding-left: 18px; }
+  .visitor-card-metric strong { font-size: clamp(36px, 10vw, 46px); }
+  .visitor-card-metric small { font-size: 8px; letter-spacing: .1em; }
   .visitor-dialog-backdrop { align-items: end; padding: 0; }
   .visitor-dialog { width: 100%; max-height: min(84dvh, 720px); padding: 34px 22px; border-inline: 0; border-bottom: 0; }
   .visitor-dialog h2 { margin-bottom: 28px; }

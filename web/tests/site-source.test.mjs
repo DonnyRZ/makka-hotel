@@ -142,3 +142,11 @@ test("visitor tracking covers every page while the card remains homepage-only", 
   assert.match(route, /visitor_overview/);
   assert.match(route, /Cache-Control/);
 });
+
+test("visitor copy is localized for every supported language", async () => {
+  const content = await readFile(path.join(root, "app", "content.ts"), "utf8");
+
+  assert.match(content, /label: "Посетители сайта"/);
+  assert.match(content, /label: "Sayt tashrifchilari"/);
+  assert.match(content, /details: "Tashrifchilar geografiyasini ko‘rish"/);
+});
