@@ -178,6 +178,14 @@ export function SitePage({ locale, page, dictionary }: SitePageProps) {
               </ul>
               <a className="button button--gold" href="https://www.google.com/maps/search/?api=1&query=Islamic+Civilization+Centre+Tashkent" target="_blank" rel="noreferrer">{dictionary.location.directions} ↗</a>
             </div>
+            <div className="location-map">
+              <iframe
+                title={dictionary.location.directions}
+                src="https://www.google.com/maps?q=Islamic+Civilization+Centre+Tashkent&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </section>
       )}

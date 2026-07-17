@@ -178,13 +178,15 @@ button { color: inherit; }
 .lightbox-nav--next { right: 28px; }
 
 .location-section { padding: 130px 0 150px; background: var(--forest-900); }
-.location-grid { display: grid; grid-template-columns: minmax(0, 820px); justify-content: center; }
-.location-card { padding: 58px; border: 1px solid var(--border-dark); background: var(--forest-800); }
+.location-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, .92fr); max-width: 1180px; padding: 0; overflow: hidden; border: 1px solid var(--border-dark); background: var(--forest-800); }
+.location-card { padding: 58px; }
 .location-card h2 { margin: 25px 0 20px; font: 600 clamp(36px, 3.5vw, 53px)/1.1 var(--serif); }
 .location-card > p { color: var(--sage-300); }
 .location-card ul { display: grid; gap: 12px; margin: 28px 0 38px; padding: 28px 0 0; border-top: 1px solid var(--border-dark); list-style: none; }
 .location-card li { display: flex; gap: 13px; color: var(--ivory-200); font-size: 14px; }
 .location-card li span { color: var(--gold-500); }
+.location-map { min-height: 100%; background: var(--forest-950); }
+.location-map iframe { display: block; width: 100%; height: 100%; min-height: 590px; border: 0; }
 
 .closing-cta { position: relative; min-height: 610px; display: grid; place-items: center; overflow: hidden; }
 .closing-cta > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -335,9 +337,11 @@ button { color: inherit; }
   .lightbox-nav { top: auto; bottom: 18px; width: 46px; height: 46px; }
   .lightbox-nav--previous { left: calc(50% - 62px); }
   .lightbox-nav--next { right: calc(50% - 62px); }
+  .location-grid { grid-template-columns: 1fr; margin-inline: 18px; }
   .location-card { padding: 30px 22px; }
   .location-card ul { margin-bottom: 30px; }
   .location-card .button { width: 100%; }
+  .location-map iframe { min-height: 360px; }
   .closing-cta { min-height: 510px; padding: 82px 0; }
   .closing-content h2 { margin-top: 20px; font-size: clamp(36px, 10.5vw, 43px); }
   .closing-content p { font-size: 15px; line-height: 1.7; }
