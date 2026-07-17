@@ -21,6 +21,15 @@ function getVisitorIp(request: Request) {
   return address && address.length <= 128 ? address.trim() : null;
 }
 
+function publicRequestOrigin(request: Request) {
+  const url = new URL(request.url);
+  const forwardedProtocol = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
+  const forwardedHost = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim();
+  const protocol = forwardedProtocol || url.protocol.replace(/:$/, "");
+  const host = forwardedHost || request.headers.get("host") || url.host;
+  return `${protocol}://${host}`;
+}
+
 function response(overview: Overview | null, status = 200) {
   return Response.json(
     overview && {
@@ -138,7 +147,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const origin = request.headers.get("origin");
-  if (origin && origin !== new URL(request.url).origin) return response(null, 403);
+  if (origin && origin !== publicRequestOrigin(request)) return response(null, 403);
   const api = getVisitorApi();
   const secret = process.env.VISITOR_IP_HASH_SECRET;
   if (!api || !secret) return response(null, 503);

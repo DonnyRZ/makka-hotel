@@ -138,6 +138,7 @@ test("visitor tracking covers every page while the card remains homepage-only", 
   assert.match(counter, /role="dialog"/);
   assert.match(route, /crypto\.subtle/);
   assert.match(route, /x-real-ip/);
+  assert.match(route, /x-forwarded-proto/);
   assert.match(route, /defaultMajorCities/);
   assert.match(route, /visitor_overview/);
   assert.match(route, /Cache-Control/);
