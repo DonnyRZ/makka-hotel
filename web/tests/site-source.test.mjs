@@ -123,6 +123,7 @@ test("visitor tracking covers every page while the card remains homepage-only", 
   const tracker = await readFile(path.join(root, "app", "components", "VisitorTracker.tsx"), "utf8");
   const tracking = await readFile(path.join(root, "app", "components", "visitorTracking.ts"), "utf8");
   const route = await readFile(path.join(root, "app", "api", "visitors", "route.ts"), "utf8");
+  const logger = await readFile(path.join(root, "app", "lib", "logger.ts"), "utf8");
 
   assert.match(compose, /visitor-api:/);
   assert.match(compose, /makka_postgres_data/);
@@ -142,6 +143,11 @@ test("visitor tracking covers every page while the card remains homepage-only", 
   assert.match(route, /defaultMajorCities/);
   assert.match(route, /visitor_overview/);
   assert.match(route, /Cache-Control/);
+  assert.match(route, /visitor\.geolocation\.failed/);
+  assert.match(route, /visitor\.database\.write/);
+  assert.match(route, /visitor\.request\.completed/);
+  assert.match(logger, /JSON\.stringify/);
+  assert.match(logger, /service: "makka-hotel"/);
 });
 
 test("visitor copy is localized for every supported language", async () => {
