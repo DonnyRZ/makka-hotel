@@ -8,6 +8,8 @@ type SoftOpeningBannerProps = {
 };
 
 const STORAGE_KEY = "mecca-soft-opening-dismissed";
+/** Enough copies so each half fills ≥ viewport on ultrawide */
+const COPIES_PER_GROUP = 8;
 
 export function SoftOpeningBanner({ message, dismissLabel }: SoftOpeningBannerProps) {
   const [dismissed, setDismissed] = useState(false);
@@ -33,34 +35,37 @@ export function SoftOpeningBanner({ message, dismissLabel }: SoftOpeningBannerPr
     }
   };
 
-  const segment = (
-    <span className="soft-opening-banner__segment">
-      <span className="soft-opening-banner__ornament" aria-hidden="true">
-        ✦
-      </span>
-      <span className="soft-opening-banner__text">{message}</span>
-    </span>
+  const renderGroup = (key: string) => (
+    <div key={key} className="soft-opening-banner__group">
+      {Array.from({ length: COPIES_PER_GROUP }, (_, i) => (
+        <span key={i} className="soft-opening-banner__segment">
+          <span className="soft-opening-banner__ornament" aria-hidden="true">
+            ✦
+          </span>
+          <span className="soft-opening-banner__text">{message}</span>
+        </span>
+      ))}
+    </div>
   );
 
   return (
     <aside className="soft-opening-banner" role="status" aria-label={message}>
       <p className="sr-only">{message}</p>
       <div className="soft-opening-banner__viewport" aria-hidden="true">
-        <div className="soft-opening-banner__track">
-          <div className="soft-opening-banner__group">
-            {segment}
-            {segment}
-            {segment}
-            {segment}
-          </div>
-          <div className="soft-opening-banner__group">
-            {segment}
-            {segment}
-            {segment}
-            {segment}
+        <div className="soft-opening-banner__marquee">
+          <div className="soft-opening-banner__track">
+            {renderGroup("a")}
+            {renderGroup("b")}
           </div>
         </div>
-        <div className="soft-opening-banner__static">{segment}</div>
+        <div className="soft-opening-banner__static">
+          <span className="soft-opening-banner__segment">
+            <span className="soft-opening-banner__ornament" aria-hidden="true">
+              ✦
+            </span>
+            <span className="soft-opening-banner__text">{message}</span>
+          </span>
+        </div>
       </div>
       <button
         type="button"
