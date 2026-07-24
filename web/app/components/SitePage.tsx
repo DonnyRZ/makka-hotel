@@ -3,6 +3,7 @@ import type { Dictionary, Locale, PageKey } from "../content";
 import { galleryImages, pageKeys, pagePath } from "../content";
 import { GalleryExplorer } from "./GalleryExplorer";
 import { Header } from "./Header";
+import { SoftOpeningBanner } from "./SoftOpeningBanner";
 import { VisitorCounter } from "./VisitorCounter";
 
 type SitePageProps = {
@@ -78,6 +79,7 @@ export function SitePage({ locale, page, dictionary }: SitePageProps) {
 
   return (
     <main lang={locale}>
+      <SoftOpeningBanner message={dictionary.softOpening.message} dismissLabel={dictionary.softOpening.dismiss} />
       <Header locale={locale} page={page} dictionary={dictionary} />
 
       <section className={`hero ${isHome ? "hero--home" : "hero--inner"}`}>

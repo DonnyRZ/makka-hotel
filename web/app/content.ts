@@ -88,6 +88,10 @@ export type Dictionary = {
     noCities: string;
     close: string;
   };
+  softOpening: {
+    message: string;
+    dismiss: string;
+  };
   footer: {
     statement: string;
     discover: string;
@@ -532,6 +536,10 @@ const en: Dictionary = {
     noCities: "City data will appear as new visits arrive.",
     close: "Close visitor details",
   },
+  softOpening: {
+    message: "Soft Opening September 9th 2026",
+    dismiss: "Dismiss soft opening announcement",
+  },
   footer: {
     statement: "Contemporary boutique hospitality shaped by Uzbek character, thoughtful comfort and fully halal service.",
     discover: "Discover", visit: "Visit", location: "Opposite the Islamic Civilization Centre, Tashkent", rights: "All rights reserved.",
@@ -660,6 +668,10 @@ const ru: Dictionary = {
     noCities: "Данные по городам появятся с новыми посещениями.",
     close: "Закрыть сведения о посетителях",
   },
+  softOpening: {
+    message: "Мягкое открытие — 9 сентября 2026",
+    dismiss: "Закрыть объявление о мягком открытии",
+  },
 };
 
 const uz: Dictionary = {
@@ -771,6 +783,10 @@ const uz: Dictionary = {
     topCities: "Eng ko‘p tashrif buyurilgan shaharlar",
     noCities: "Yangi tashriflar kelishi bilan shahar ma’lumotlari paydo bo‘ladi.",
     close: "Tashrifchilar ma’lumotlarini yopish",
+  },
+  softOpening: {
+    message: "Yumshoq ochilish — 2026-yil 9-sentabr",
+    dismiss: "Soft opening e’lonini yopish",
   },
 };
 
