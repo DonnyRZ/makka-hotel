@@ -201,7 +201,6 @@ const en: Dictionary = {
         "Warm public spaces and attentive service support a seamless stay throughout the day.",
       features: [
         { title: "24-hour concierge", text: "Support for arrivals, local guidance and guest needs." },
-        { title: "Prayer room", text: "A dedicated, peaceful space within the hotel." },
         { title: "Reading lounge", text: "A calm corner for reflection, conversation and pause." },
         { title: "Multilingual welcome", text: "Front-desk assistance across key international languages." },
       ],
@@ -258,7 +257,6 @@ const en: Dictionary = {
       features: [
         { title: "Double-height lobby", text: "A generous arrival that establishes the hotel’s architectural identity." },
         { title: "Reading lounge", text: "A comfortable setting for a quiet pause or informal conversation." },
-        { title: "Prayer room", text: "A dedicated space supporting the hotel’s halal hospitality promise." },
         { title: "Personal service", text: "A boutique scale that enables attentive and welcoming guest care." },
       ],
       ctaEyebrow: "Stay with us",
@@ -579,7 +577,7 @@ const ru: Dictionary = {
       ],
       featuresTitle: "Гостеприимство, продуманное от встречи до отдыха",
       featuresIntro: "Тёплые общественные пространства и внимательный сервис делают пребывание цельным и спокойным.",
-      features: [{ title: "Консьерж 24/7", text: "Помощь при заезде, рекомендации по городу и забота о гостях." }, { title: "Молитвенная комната", text: "Отдельное тихое пространство внутри отеля." }, { title: "Читальный салон", text: "Спокойное место для чтения, беседы и паузы." }, { title: "Многоязычный приём", text: "Помощь на ключевых международных языках." }],
+      features: [{ title: "Консьерж 24/7", text: "Помощь при заезде, рекомендации по городу и забота о гостях." }, { title: "Читальный салон", text: "Спокойное место для чтения, беседы и паузы." }, { title: "Многоязычный приём", text: "Помощь на ключевых международных языках." }],
       ctaEyebrow: "Ваш Ташкент", ctaTitle: "Начните путешествие в Mecca", ctaText: "Бутик-отель, где встречаются культура, комфорт и продуманное халяльное гостеприимство.", ctaButton: "Посмотреть номера",
     },
     hotel: {
@@ -593,7 +591,7 @@ const ru: Dictionary = {
         { ...en.pages.hotel.sections[1], eyebrow: "Современный узбекский характер", title: "Наследие, переосмысленное сегодня", body: "Арочные проёмы, узорные экраны, кирпич, дерево и текстиль создают связь с Ташкентом, сохраняя спокойную современную атмосферу.", alt: "Концептуальная визуализация с узбекским текстилем и арочной кладкой" },
       ],
       featuresTitle: "Общественные пространства со смыслом", featuresIntro: "От прибытия до тихой паузы каждое пространство играет свою роль.",
-      features: [{ title: "Двухсветное лобби", text: "Выразительное пространство встречи гостей." }, { title: "Читальный салон", text: "Комфортное место для чтения или беседы." }, { title: "Молитвенная комната", text: "Пространство, поддерживающее халяльную концепцию отеля." }, { title: "Персональный сервис", text: "Камерный формат для внимательной заботы о гостях." }],
+      features: [{ title: "Двухсветное лобби", text: "Выразительное пространство встречи гостей." }, { title: "Читальный салон", text: "Комфортное место для чтения или беседы." }, { title: "Персональный сервис", text: "Камерный формат для внимательной заботы о гостях." }],
       ctaEyebrow: "Остановитесь у нас", ctaTitle: "Познакомьтесь с Mecca лично", ctaText: "Откройте номера и начните планировать пребывание в Ташкенте.", ctaButton: "Посмотреть номера",
     },
     rooms: {
@@ -700,7 +698,7 @@ const uz: Dictionary = {
         { ...en.pages.home.sections[2], eyebrow: "Shahar uzra", title: "Rooftopda oltin shafaq lahzalari", body: "600,7 m² rooftop kafe va bar Islom sivilizatsiyasi markazi hamda Toshkent manzarasini ochadi — qahva, yengil taomlar va yaqin davradagi bayramlar uchun.", alt: "Quyosh botishidagi rooftop kafening konseptual ko‘rinishi", linkLabel: "Rooftopni ko‘ring" },
       ],
       featuresTitle: "Kelishdan hordiqgacha o‘ylangan mehmondo‘stlik", featuresIntro: "Iliq umumiy makonlar va e’tiborli xizmat kun davomida ravon tajriba yaratadi.",
-      features: [{ title: "24 soatlik konsyerj", text: "Kelish, shahar bo‘yicha maslahat va mehmon ehtiyojlari uchun yordam." }, { title: "Namozxona", text: "Mehmonxona ichidagi sokin va alohida makon." }, { title: "O‘qish zali", text: "Mutolaa, suhbat va xotirjamlik uchun joy." }, { title: "Ko‘p tilli kutib olish", text: "Asosiy xalqaro tillarda resepshen yordami." }],
+      features: [{ title: "24 soatlik konsyerj", text: "Kelish, shahar bo‘yicha maslahat va mehmon ehtiyojlari uchun yordam." }, { title: "O‘qish zali", text: "Mutolaa, suhbat va xotirjamlik uchun joy." }, { title: "Ko‘p tilli kutib olish", text: "Asosiy xalqaro tillarda resepshen yordami." }],
       ctaEyebrow: "Toshkentdagi safaringiz", ctaTitle: "Sayohatingizni Meccadan boshlang", ctaText: "Madaniyat, qulaylik va e’tiborli halol mehmondo‘stlik uyg‘unlashgan butik turar joy.", ctaButton: "Xonalarni ko‘ring",
     },
     hotel: {
@@ -713,7 +711,7 @@ const uz: Dictionary = {
         { ...en.pages.hotel.sections[1], eyebrow: "Zamonaviy o‘zbekona ruh", title: "Bugun uchun qayta talqin qilingan meros", body: "Arkasimon ochilmalar, naqshli panjaralar, g‘isht, yog‘och va mato detallari zamonaviy sokin muhitni saqlagan holda Toshkent bilan bog‘laydi.", alt: "O‘zbek matolari va arkasimon g‘ishtli konseptual ko‘rinish" },
       ],
       featuresTitle: "Maqsadli umumiy makonlar", featuresIntro: "Kelishdan sokin dam olishgacha har bir joy mehmon tajribasida aniq vazifaga ega.",
-      features: [{ title: "Ikki balandlikdagi lobby", text: "Mehmonxona me’moriy ruhini tanishtiruvchi keng kirish." }, { title: "O‘qish zali", text: "Mutolaa yoki norasmiy suhbat uchun qulay joy." }, { title: "Namozxona", text: "Halol mehmondo‘stlik va’dasini qo‘llab-quvvatlovchi makon." }, { title: "Shaxsiy xizmat", text: "Butik ko‘lam e’tiborli g‘amxo‘rlik imkonini beradi." }],
+      features: [{ title: "Ikki balandlikdagi lobby", text: "Mehmonxona me’moriy ruhini tanishtiruvchi keng kirish." }, { title: "O‘qish zali", text: "Mutolaa yoki norasmiy suhbat uchun qulay joy." }, { title: "Shaxsiy xizmat", text: "Butik ko‘lam e’tiborli g‘amxo‘rlik imkonini beradi." }],
       ctaEyebrow: "Biz bilan qoling", ctaTitle: "Meccani shaxsan his eting", ctaText: "Xonalarni ko‘ring va Toshkentdagi safaringizni rejalashtiring.", ctaButton: "Xonalarni ko‘ring",
     },
     rooms: {

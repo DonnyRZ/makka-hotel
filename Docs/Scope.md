@@ -33,7 +33,7 @@ Informasi bisnis utama pada website mengikuti *Mecca Hotel Profile Presentation 
 - Penyajian positioning 100% halal-certified hospitality.
 - Penyajian fakta utama hotel, termasuk lahan 3.000 m², total built-up area 3.038,7 m², tiga lantai dan rooftop, kapasitas, serta lokasi.
 - Informasi 30 kamar berukuran rata-rata 18 m² dengan queen bed, penanda kiblat, prayer mat, serta pemandangan ke Islamic Civilization Centre atau inner garden.
-- Informasi double-height lobby, reading lounge, reception, concierge 24 jam, prayer room, dan layanan front desk dalam bahasa Uzbek, Rusia, Inggris, Indonesia, dan Arab.
+- Informasi double-height lobby, reading lounge, reception, concierge 24 jam, dan layanan front desk dalam bahasa Uzbek, Rusia, Inggris, Indonesia, dan Arab.
 - Informasi Indonesian Restaurant seluas 497 m² di ground floor.
 - Informasi Italian Restaurant seluas 452 m² di second floor.
 - Informasi Rooftop Cafe & Bar seluas 600,7 m² dengan pemandangan Islamic Civilization Centre dan skyline Tashkent.

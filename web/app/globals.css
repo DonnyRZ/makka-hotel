@@ -156,7 +156,7 @@ button { color: inherit; }
 .features-heading { display: grid; grid-template-columns: 1.4fr .7fr; align-items: end; gap: 60px; }
 .features-heading h2 { max-width: 800px; margin: 23px 0 0; font: 600 clamp(40px, 4.3vw, 62px)/1.08 var(--serif); letter-spacing: -.035em; }
 .features-heading > p { margin: 0 0 8px; color: #59675f; font-size: 17px; line-height: 1.75; }
-.feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 72px; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 72px; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
 .feature-card { min-height: 280px; padding: 36px 30px; border-right: 1px solid var(--border-light); }
 .feature-card:first-child { border-left: 1px solid var(--border-light); }
 .feature-card > span { color: #9a7b37; font-size: 10px; font-weight: 700; letter-spacing: .15em; }
