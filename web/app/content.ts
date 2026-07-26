@@ -84,9 +84,15 @@ export type Dictionary = {
     total: string;
     active: string;
     cities: string;
+    downloads: string;
+    uniqueDownloaders: string;
     topCities: string;
     noCities: string;
     close: string;
+  };
+  profileDownload: {
+    button: string;
+    footerLink: string;
   };
   softOpening: {
     message: string;
@@ -237,8 +243,8 @@ const en: Dictionary = {
           title: "A concept rooted in peace and completeness",
           body:
             "The hotel’s 30 rooms draw inspiration from the 30 Juz of the Qur’an. The idea is expressed through an atmosphere of balance, peace and spiritual harmony rather than literal decoration.",
-          image: "/images/rooms/room-detail.jpg",
-          alt: "Guest room details in warm wood and neutral tones",
+          image: "/images/rooms/room-bed.jpg",
+          alt: "Warm guest room with arched window and lantern lighting",
         },
         {
           eyebrow: "Contemporary Uzbek character",
@@ -527,12 +533,18 @@ const en: Dictionary = {
   visitor: {
     label: "Website visitors",
     details: "View geographic breakdown",
-    total: "Total recorded",
+    total: "Visits",
     active: "Active in 7 days",
     cities: "Major cities",
+    downloads: "Profile downloads",
+    uniqueDownloaders: "Unique downloaders",
     topCities: "Top cities",
     noCities: "City data will appear as new visits arrive.",
     close: "Close visitor details",
+  },
+  profileDownload: {
+    button: "Download hotel profile",
+    footerLink: "Download hotel profile (PDF)",
   },
   softOpening: {
     message: "Soft Opening September 9th 2026",
@@ -659,12 +671,18 @@ const ru: Dictionary = {
   visitor: {
     label: "Посетители сайта",
     details: "Посмотреть географию посетителей",
-    total: "Всего учтено",
+    total: "Визиты",
     active: "Активны за 7 дней",
     cities: "Крупные города",
+    downloads: "Скачивания профиля",
+    uniqueDownloaders: "Уникальные скачивания",
     topCities: "Города с наибольшим числом посетителей",
     noCities: "Данные по городам появятся с новыми посещениями.",
     close: "Закрыть сведения о посетителях",
+  },
+  profileDownload: {
+    button: "Скачать профиль отеля",
+    footerLink: "Скачать профиль отеля (PDF)",
   },
   softOpening: {
     message: "Мягкое открытие — 9 сентября 2026",
@@ -775,12 +793,18 @@ const uz: Dictionary = {
   visitor: {
     label: "Sayt tashrifchilari",
     details: "Tashrifchilar geografiyasini ko‘rish",
-    total: "Jami qayd etilgan",
+    total: "Tashriflar",
     active: "7 kun ichida faol",
     cities: "Yirik shaharlar",
+    downloads: "Profil yuklab olishlar",
+    uniqueDownloaders: "Noyob yuklab oluvchilar",
     topCities: "Eng ko‘p tashrif buyurilgan shaharlar",
     noCities: "Yangi tashriflar kelishi bilan shahar ma’lumotlari paydo bo‘ladi.",
     close: "Tashrifchilar ma’lumotlarini yopish",
+  },
+  profileDownload: {
+    button: "Mehmonxona profilini yuklab olish",
+    footerLink: "Mehmonxona profilini yuklab olish (PDF)",
   },
   softOpening: {
     message: "Yumshoq ochilish — 2026-yil 9-sentabr",

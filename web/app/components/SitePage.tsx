@@ -3,6 +3,7 @@ import type { Dictionary, Locale, PageKey } from "../content";
 import { galleryImages, pageKeys, pagePath } from "../content";
 import { GalleryExplorer } from "./GalleryExplorer";
 import { Header } from "./Header";
+import { ProfileDownloadLink } from "./ProfileDownloadLink";
 import { SoftOpeningBanner } from "./SoftOpeningBanner";
 import { VisitorCounter } from "./VisitorCounter";
 
@@ -37,6 +38,7 @@ function Footer({ locale, page, dictionary }: { locale: Locale; page: PageKey; d
             <span className="brand-copy"><strong>MECCA</strong><small>Boutique Hotel &amp; Restaurant</small></span>
           </Link>
           <p>{dictionary.footer.statement}</p>
+          <ProfileDownloadLink className="footer-download">{dictionary.profileDownload.footerLink}</ProfileDownloadLink>
         </div>
         <div className="footer-column">
           <span>{dictionary.footer.discover}</span>
@@ -179,12 +181,12 @@ export function SitePage({ locale, page, dictionary }: SitePageProps) {
                 <li><span>✦</span>{dictionary.location.airport}</li>
                 <li><span>✦</span>{dictionary.location.station}</li>
               </ul>
-              <a className="button button--gold" href="https://www.google.com/maps/search/?api=1&query=Islamic+Civilization+Centre+Tashkent" target="_blank" rel="noreferrer">{dictionary.location.directions} ↗</a>
+              <a className="button button--gold" href="https://www.google.com/maps/search/?api=1&query=39.8081667,66.9496389" target="_blank" rel="noreferrer">{dictionary.location.directions} ↗</a>
             </div>
             <div className="location-map">
               <iframe
                 title={dictionary.location.directions}
-                src="https://www.google.com/maps?q=Islamic+Civilization+Centre+Tashkent&output=embed"
+                src="https://www.google.com/maps?q=39.8081667,66.9496389&z=17&output=embed"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -218,7 +220,10 @@ export function SitePage({ locale, page, dictionary }: SitePageProps) {
           <SectionLabel>{copy.ctaEyebrow}</SectionLabel>
           <h2>{copy.ctaTitle}</h2>
           <p>{copy.ctaText}</p>
-          <Link className="button button--gold" href={closingLinks[page]}>{copy.ctaButton}</Link>
+          <div className="closing-actions">
+            <Link className="button button--gold" href={closingLinks[page]}>{copy.ctaButton}</Link>
+            <ProfileDownloadLink className="button button--outline">{dictionary.profileDownload.button}</ProfileDownloadLink>
+          </div>
         </div>
       </section>
 

@@ -156,4 +156,38 @@ test("visitor copy is localized for every supported language", async () => {
   assert.match(content, /label: "Посетители сайта"/);
   assert.match(content, /label: "Sayt tashrifchilari"/);
   assert.match(content, /details: "Tashrifchilar geografiyasini ko‘rish"/);
+  assert.match(content, /downloads: "Profile downloads"/);
+  assert.match(content, /downloads: "Скачивания профиля"/);
+  assert.match(content, /downloads: "Profil yuklab olishlar"/);
+  assert.match(content, /button: "Download hotel profile"/);
+  assert.match(content, /button: "Скачать профиль отеля"/);
+  assert.match(content, /button: "Mehmonxona profilini yuklab olish"/);
+});
+
+test("profile download tracking uses PostgREST and homepage UI hooks", async () => {
+  const compose = await readFile(path.join(root, "..", "compose.yaml"), "utf8");
+  const migration = await readFile(path.join(root, "..", "db", "init", "002-profile-downloads.sql"), "utf8");
+  const sitePage = await readFile(path.join(root, "app", "components", "SitePage.tsx"), "utf8");
+  const counter = await readFile(path.join(root, "app", "components", "VisitorCounter.tsx"), "utf8");
+  const link = await readFile(path.join(root, "app", "components", "ProfileDownloadLink.tsx"), "utf8");
+  const tracking = await readFile(path.join(root, "app", "components", "downloadTracking.ts"), "utf8");
+  const route = await readFile(path.join(root, "app", "api", "downloads", "profile", "route.ts"), "utf8");
+
+  assert.match(compose, /db\/init:\/migrations:ro/);
+  assert.match(compose, /for f in \/migrations\/\*\.sql/);
+  assert.match(compose, /--file="\$\$f"/);
+  assert.match(migration, /CREATE TABLE IF NOT EXISTS profile_downloads/);
+  assert.match(migration, /register_profile_download/);
+  assert.match(migration, /download_overview/);
+  assert.match(sitePage, /ProfileDownloadLink/);
+  assert.match(sitePage, /dictionary\.profileDownload\.button/);
+  assert.match(sitePage, /dictionary\.profileDownload\.footerLink/);
+  assert.match(counter, /fetchDownloadMetrics/);
+  assert.match(counter, /copy\.downloads/);
+  assert.match(link, /trackProfileDownload/);
+  assert.match(link, /Mecca-Hotel-Summary\.pdf/);
+  assert.match(tracking, /fetch\("\/api\/downloads\/profile"/);
+  assert.match(route, /register_profile_download/);
+  assert.match(route, /download_overview/);
+  assert.match(route, /x-real-ip/);
 });

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { fetchDownloadMetrics, type DownloadMetrics } from "./downloadTracking";
 import { isVisitorMetrics, registerVisitor, type VisitorMetrics } from "./visitorTracking";
-
 
 type VisitorCounterProps = {
   copy: {
@@ -11,6 +11,8 @@ type VisitorCounterProps = {
     total: string;
     active: string;
     cities: string;
+    downloads: string;
+    uniqueDownloaders: string;
     topCities: string;
     noCities: string;
     close: string;
@@ -18,13 +20,16 @@ type VisitorCounterProps = {
   locale: string;
 };
 
-const emptyMetrics: VisitorMetrics = { activeVisitors: 0, cities: 0, count: 0, topCities: [] };
+const emptyVisitorMetrics: VisitorMetrics = { activeVisitors: 0, cities: 0, count: 0, topCities: [] };
+const emptyDownloadMetrics: DownloadMetrics = { totalDownloads: 0, uniqueDownloaders: 0 };
 
 export function VisitorCounter({ copy, locale }: VisitorCounterProps) {
   const [metrics, setMetrics] = useState<VisitorMetrics | null>(null);
+  const [downloads, setDownloads] = useState<DownloadMetrics | null>(null);
   const [open, setOpen] = useState(false);
   const number = new Intl.NumberFormat(locale);
-  const data = metrics ?? emptyMetrics;
+  const data = metrics ?? emptyVisitorMetrics;
+  const downloadData = downloads ?? emptyDownloadMetrics;
   const highestCityCount = Math.max(...data.topCities.map((city) => city.count), 1);
 
   useEffect(() => {
@@ -33,7 +38,12 @@ export function VisitorCounter({ copy, locale }: VisitorCounterProps) {
     registerVisitor()
       .then((result: unknown) => {
         if (active && isVisitorMetrics(result)) setMetrics(result);
-      })
+      });
+
+    fetchDownloadMetrics()
+      .then((result) => {
+        if (active && result) setDownloads(result);
+      });
 
     return () => { active = false; };
   }, []);
@@ -54,9 +64,15 @@ export function VisitorCounter({ copy, locale }: VisitorCounterProps) {
             <small>{copy.label}</small>
             <em>{copy.details} <b aria-hidden="true">↗</b></em>
           </span>
-          <span className="visitor-card-metric">
-            <strong>{metrics === null ? "—" : number.format(data.count)}</strong>
-            <small>{copy.total}</small>
+          <span className="visitor-card-metrics">
+            <span className="visitor-card-metric">
+              <strong>{metrics === null ? "—" : number.format(data.count)}</strong>
+              <small>{copy.total}</small>
+            </span>
+            <span className="visitor-card-metric">
+              <strong>{downloads === null ? "—" : number.format(downloadData.totalDownloads)}</strong>
+              <small>{copy.downloads}</small>
+            </span>
           </span>
         </button>
       </div>
@@ -73,6 +89,8 @@ export function VisitorCounter({ copy, locale }: VisitorCounterProps) {
               <div><dt>{copy.total}</dt><dd>{number.format(data.count)}</dd></div>
               <div><dt>{copy.active}</dt><dd>{number.format(data.activeVisitors)}</dd></div>
               <div><dt>{copy.cities}</dt><dd>{number.format(data.cities)}</dd></div>
+              <div><dt>{copy.downloads}</dt><dd>{number.format(downloadData.totalDownloads)}</dd></div>
+              <div><dt>{copy.uniqueDownloaders}</dt><dd>{number.format(downloadData.uniqueDownloaders)}</dd></div>
             </dl>
             {data.topCities.length > 0 ? (
               <ol className="city-list">
