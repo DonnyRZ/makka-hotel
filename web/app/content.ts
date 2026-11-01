@@ -94,10 +94,6 @@ export type Dictionary = {
     button: string;
     footerLink: string;
   };
-  softOpening: {
-    message: string;
-    dismiss: string;
-  };
   footer: {
     statement: string;
     discover: string;
@@ -546,10 +542,6 @@ const en: Dictionary = {
     button: "Download hotel profile",
     footerLink: "Download hotel profile (PDF)",
   },
-  softOpening: {
-    message: "Soft Opening September 9th 2026",
-    dismiss: "Dismiss soft opening announcement",
-  },
   footer: {
     statement: "Contemporary boutique hospitality shaped by Uzbek character, thoughtful comfort and fully halal service.",
     discover: "Discover", visit: "Visit", location: "Opposite the Islamic Civilization Centre, Tashkent", rights: "All rights reserved.",
@@ -684,10 +676,6 @@ const ru: Dictionary = {
     button: "Скачать профиль отеля",
     footerLink: "Скачать профиль отеля (PDF)",
   },
-  softOpening: {
-    message: "Мягкое открытие — 9 сентября 2026",
-    dismiss: "Закрыть объявление о мягком открытии",
-  },
 };
 
 const uz: Dictionary = {
@@ -805,10 +793,6 @@ const uz: Dictionary = {
   profileDownload: {
     button: "Mehmonxona profilini yuklab olish",
     footerLink: "Mehmonxona profilini yuklab olish (PDF)",
-  },
-  softOpening: {
-    message: "Yumshoq ochilish — 2026-yil 9-sentabr",
-    dismiss: "Soft opening e’lonini yopish",
   },
 };
 
