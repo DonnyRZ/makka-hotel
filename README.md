@@ -67,3 +67,30 @@ proxy_set_header X-Real-IP $remote_addr;
 ```
 
 The counter stores only an HMAC hash of that address, never the raw IP.
+
+## News and event video
+
+News is available at `/en/news`, `/ru/news`, and `/uz/news`. The TITF story uses
+the supplied handshake photograph for its thumbnail and opening image, with the
+event film embedded in the article. Localized editorial content lives in
+`web/app/news.ts`; curated media lives in `web/public/images/news` and
+`web/public/videos/news`.
+
+The standalone server does not provide MP4 MIME types or byte-range responses.
+For production playback and seeking, install the scoped Nginx media snippet:
+
+```bash
+install -m 644 deploy/nginx-news-media.conf /etc/nginx/snippets/makka-news-media.conf
+```
+
+Add this line inside the Mecca HTTPS server block and the IP review server
+block, alongside their existing proxy location (keep the HTTP-to-HTTPS redirect
+server unchanged):
+
+```nginx
+include /etc/nginx/snippets/makka-news-media.conf;
+```
+
+Validate with `nginx -t`, then reload Nginx. A request to the MP4 with
+`Range: bytes=0-1023` should return `206`, `Content-Type: video/mp4`, and a
+`Content-Range` header.
