@@ -4,16 +4,21 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { Dictionary, Locale, PageKey } from "../content";
 import { locales, pagePath } from "../content";
+import { newsCopy, newsPath } from "../news";
 
 type HeaderProps = {
   locale: Locale;
-  page: PageKey;
+  page: PageKey | "news";
   dictionary: Dictionary;
+  articleSlug?: string;
 };
 
-const primaryNav: PageKey[] = ["home", "hotel", "rooms", "dining", "rooftop", "events", "location", "gallery"];
+const primaryNav: (PageKey | "news")[] = ["home", "hotel", "rooms", "dining", "rooftop", "events", "news", "location", "gallery"];
 
-export function Header({ locale, page, dictionary }: HeaderProps) {
+export function Header({ locale, page, dictionary, articleSlug }: HeaderProps) {
+  const navPath = (language: Locale, item: PageKey | "news") => item === "news" ? newsPath(language) : pagePath(language, item);
+  const languagePath = (language: Locale) => page === "news" ? newsPath(language, articleSlug) : pagePath(language, page);
+  const navLabel = (item: PageKey | "news") => item === "news" ? newsCopy[locale].nav : dictionary.nav[item];
   const [open, setOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -53,7 +58,7 @@ export function Header({ locale, page, dictionary }: HeaderProps) {
 
   return (
     <>
-      <header className={`site-header ${scrolled || open ? "site-header--solid" : ""} ${open ? "site-header--menu-open" : ""}`}>
+      <header className={`site-header ${scrolled || open || page === "news" ? "site-header--solid" : ""} ${open ? "site-header--menu-open" : ""}`}>
         <div className="header-inner">
           <Link className="brand" href={pagePath(locale, "home")} aria-label="Mecca Boutique Hotel home">
             <span className="brand-copy">
@@ -64,8 +69,8 @@ export function Header({ locale, page, dictionary }: HeaderProps) {
 
           <nav className="desktop-nav" aria-label="Primary navigation">
             {primaryNav.map((item) => (
-              <Link key={item} className={page === item ? "active" : ""} href={pagePath(locale, item)}>
-                {dictionary.nav[item]}
+              <Link key={item} className={page === item ? "active" : ""} aria-current={page === item ? "page" : undefined} href={navPath(locale, item)}>
+                {navLabel(item)}
               </Link>
             ))}
           </nav>
@@ -84,7 +89,7 @@ export function Header({ locale, page, dictionary }: HeaderProps) {
               </button>
               <div id="language-menu" className="language-dropdown-menu">
                 {locales.map((item) => (
-                  <Link key={item} className={locale === item ? "active" : ""} href={pagePath(item, page)} hrefLang={item} onClick={() => setLanguageOpen(false)}>
+                  <Link key={item} className={locale === item ? "active" : ""} href={languagePath(item)} hrefLang={item} onClick={() => setLanguageOpen(false)}>
                     {item === "en" ? "English" : item === "ru" ? "Русский" : "O‘zbekcha"}
                   </Link>
                 ))}
@@ -107,15 +112,15 @@ export function Header({ locale, page, dictionary }: HeaderProps) {
       <div id="mobile-menu" className={`mobile-menu ${open ? "mobile-menu--open" : ""}`} aria-hidden={!open} inert={!open ? true : undefined}>
         <nav aria-label="Mobile navigation">
           {primaryNav.map((item, index) => (
-            <Link key={item} className={page === item ? "active" : ""} href={pagePath(locale, item)} onClick={() => setOpen(false)}>
-              <span>{String(index + 1).padStart(2, "0")}</span>{dictionary.nav[item]}
+            <Link key={item} className={page === item ? "active" : ""} aria-current={page === item ? "page" : undefined} href={navPath(locale, item)} onClick={() => setOpen(false)}>
+              <span>{String(index + 1).padStart(2, "0")}</span>{navLabel(item)}
             </Link>
           ))}
         </nav>
         <div className="mobile-menu-footer">
           <div className="language-switcher language-switcher--mobile">
             {locales.map((item) => (
-              <Link key={item} className={locale === item ? "active" : ""} href={pagePath(item, page)} hrefLang={item} onClick={() => setOpen(false)}>
+              <Link key={item} className={locale === item ? "active" : ""} href={languagePath(item)} hrefLang={item} onClick={() => setOpen(false)}>
                 {item === "en" ? "English" : item === "ru" ? "Русский" : "O‘zbekcha"}
               </Link>
             ))}

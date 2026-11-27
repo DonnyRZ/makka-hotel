@@ -5,6 +5,7 @@ import { GalleryExplorer } from "./GalleryExplorer";
 import { Header } from "./Header";
 import { ProfileDownloadLink } from "./ProfileDownloadLink";
 import { VisitorCounter } from "./VisitorCounter";
+import { newsCopy, newsPath } from "../news";
 
 type SitePageProps = {
   locale: Locale;
@@ -26,7 +27,7 @@ function ArrowLink({ href, children }: { href: string; children: React.ReactNode
   return <Link className="arrow-link" href={href}>{children}<span aria-hidden="true">→</span></Link>;
 }
 
-function Footer({ locale, page, dictionary }: { locale: Locale; page: PageKey; dictionary: Dictionary }) {
+export function Footer({ locale, page, dictionary }: { locale: Locale; page: PageKey | "news"; dictionary: Dictionary }) {
   const footerNav: PageKey[] = ["hotel", "rooms", "dining", "rooftop", "events", "gallery"];
   return (
     <footer className="site-footer">
@@ -42,6 +43,7 @@ function Footer({ locale, page, dictionary }: { locale: Locale; page: PageKey; d
         <div className="footer-column">
           <span>{dictionary.footer.discover}</span>
           {footerNav.map((item) => <Link key={item} href={pagePath(locale, item)}>{dictionary.nav[item]}</Link>)}
+          <Link href={newsPath(locale)}>{newsCopy[locale].nav}</Link>
         </div>
         <div className="footer-column footer-visit">
           <span>{dictionary.footer.visit}</span>
